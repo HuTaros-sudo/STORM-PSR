@@ -1,11 +1,11 @@
 #!/bin/bash
+set -e
 
-source activate {Your environment name}
-cd STORM-PSR/temporal_stream/pretrain_spatial_encoder
+cd /workspace/STORM-PSR/temporal_stream/pretrained_spatial
 
 #-- Run path
-path_name_pt=your_run_name
-log_path_pt=your_log_path
+path_name_pt=industreal_spatial_v1
+log_path_pt=/workspace/outputs/spatial
 
 
 #-- Hyperparameters
@@ -32,9 +32,9 @@ psr_label_path=your_label_path
 
 #-- Contrastive learning setting 
 n_classes=11
-n_real=8
-n_synth=8
-n_bg=8
+n_real=16
+n_synth=0
+n_bg=0
 random_seed=1234
 n_frames=20
 
@@ -51,4 +51,4 @@ bright=0.1
 sat=0.7
 cont=0.1
 
-python train.py $path_name_pt --run_path $log_path_pt --epoch $EPOCH_stage1 --model $model --loss $loss_type --use_pretrained_weights --hidden $hideen --lr $lr --scheduler $scheduler --T_0 $T_0 --lr_gamma $lr_gamma --lr_step $lr_steps --warmup $warmup_epochs --n_iters $n_iters --margin $margin --weight_decay $weight_decay --temperature $temperature --stop_after $stop_after --data_path $video_data_path --syn_path $syn_path --psr_label_path $psr_label_path --n_classes $n_classes --n_real $n_real --n_synth $n_synth --n_bg $n_bg --exclude_bg $exclude_bg --seed $random_seed --n_frames $n_frames --img_w $img_w --img_h $img_h --channels $channels --workers $workers --batch_size $batch_size --kernel_size $kernel_size --sigma_l $sigma_l --sigma_h $sigma_h --bright $bright --sat $sat --cont $cont 
+python train.py $path_name_pt --run_path $log_path_pt --epoch $EPOCH_stage1 --model $model --loss $loss_type --use_pretrained_weights --hidden $hidden --lr $lr --scheduler $scheduler --T_0 $T_0 --lr_gamma $lr_gamma --lr_step $lr_steps --warmup $warmup_epochs --n_iters $n_iters --margin $margin --weight_decay $weight_decay --temperature $temperature --stop_after $stop_after --data_path $video_data_path --syn_path $syn_path --psr_label_path $psr_label_path --n_classes $n_classes --n_real $n_real --n_synth $n_synth --n_bg $n_bg --exclude_bg $exclude_bg --seed $random_seed --n_frames $n_frames --img_w $img_w --img_h $img_h --channels $channels --workers $workers --batch_size $batch_size --kernel_size $kernel_size --sigma_l $sigma_l --sigma_h $sigma_h --bright $bright --sat $sat --cont $cont 
